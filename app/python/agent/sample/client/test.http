@@ -1,0 +1,49 @@
+@host=http://localhost:8000
+
+
+## 関数呼び出し
+POST  {{host}}/prompt
+Content-Type: application/json
+
+{
+    "message": "1/10に品川周辺で4人、飲み放題のある焼肉の美味しい店探して"
+}
+
+# ## ファイル検索
+# POST  {{host}}/prompt
+# Content-Type: application/json
+
+# {
+#     "message": "商品: スマートカメラの特徴を教えて"
+# }
+
+# ## Bing Search
+# POST  {{host}}/prompt
+# Content-Type: application/json
+
+# {
+#     "message": "日本の小売業界の最新情報は何ですか?"
+# }
+
+# ## Code Interpreter
+# POST {{host}}/code_interpreter
+# Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+# ------WebKitFormBoundary7MA4YWxkTrZu0gW
+# Content-Disposition: form-data; name="file"; filename="nifty_500_quarterly_results.csv"
+# Content-Type: text/csv
+
+# < ./nifty_500_quarterly_results.csv
+# ------WebKitFormBoundary7MA4YWxkTrZu0gW
+# Content-Disposition: form-data; name="message"
+
+# アップロードされたCSVファイルから、運輸セクターの営業利益の棒グラフを作成し、ファイルを提供してください。
+# ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+# ## Open API 仕様
+# POST  {{host}}/openapi
+# Content-Type: application/json
+
+# {
+#     "message": "世田谷区の明日の天気を教えて"
+# }

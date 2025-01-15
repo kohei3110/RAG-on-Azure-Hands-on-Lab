@@ -7,21 +7,21 @@ Dec 2024
 
 ### Contents
 
-- [Appendix 1: Azure OpenAI 使用状況の確認](#appendix-1-azure-openai-使用状況の確認)
+- [Appendix 1-1: Azure OpenAI 使用状況の確認](#appendix-1-azure-openai-使用状況の確認)
 
-- [Appendix 2: トレースを使用したアプリケーションのデバッグ](#appendix-2-トレースを使用したアプリケーションのデバッグ)
+- [Appendix 1-2: トレースを使用したアプリケーションのデバッグ](#appendix-2-トレースを使用したアプリケーションのデバッグ)
 
-- [Appendix 3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価](#appendix-3-azure-openai-document-intelligence-を活用して作成した評価用データセットを用いた生成-ai-の評価)
+- [Appendix 1-3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価](#appendix-3-azure-openai-document-intelligence-を活用して作成した評価用データセットを用いた生成-ai-の評価)
 
 <br />
 
-## Appendix 1: Azure OpenAI 使用状況の確認
+## Appendix 1-1: Azure OpenAI 使用状況の確認
 
 - AI Foundry に移動し、**デプロイ** > **モデルの選択**、**メトリック**からリクエスト数・トークンの使用状況・リスクと安全性を確認
 
 <img src="./images/appendix-18.png" />
 
-## Appendix 2: トレースを使用したアプリケーションのデバッグ
+## Appendix 1-2: トレースを使用したアプリケーションのデバッグ
 
 - AI Foundry ハブを作成
 
@@ -150,7 +150,7 @@ Dec 2024
 
     </details>
 
-## Appendix 3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価
+## Appendix 1-3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価
 
 <img src="./images/appendix-19.png" />
 
