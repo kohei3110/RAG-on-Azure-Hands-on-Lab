@@ -346,3 +346,46 @@
     ```
 
     ※ Bastion 展開用の仮想ネットワーク、および他のリソースを展開した仮想ネットワーク間との VNet Peering を作成
+
+## 5. 仮想マシンに WSL2、Docker、VS Code をインストール
+
+Dev Container を使ってハンズオンを実施するため、WSL2、Docker、VS Code を仮想マシンにインストール。
+
+### 5-1. WSL を有効化
+
+- 管理者権限でPower Shellを開いて、以下コマンドを実行
+
+```
+wsl --install
+```
+
+- **仮想マシンを再起動**
+
+- Ubuntu アプリを開き、ユーザー名・パスワード（VM ユーザー名・パスワードと同じもの）を設定
+
+### 5-2. Docker CE をインストール
+
+- Docker 公式 GPG 鍵を追加
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+- Docker 安定版のレポジトリを追加
+
+```
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+- レポジトリをアップデートし、Docker Engine をインストール
+
+```
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io -y
+sudo usermod -aG docker $USER 
+newgrp docker
+```
+
+### 5-3. Visual Studio Code をインストール
+
+仮想マシンから [VS Code Official Site](https://code.visualstudio.com/) にアクセスし、インストール
