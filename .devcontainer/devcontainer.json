@@ -1,0 +1,31 @@
+{
+    "name": "RAG-on-Azure-HOL",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": ".."
+    },
+    "initializeCommand": "/bin/bash .devcontainer/scripts/initialize.sh",
+    "runArgs": [
+        "--env-file",
+        ".devcontainer/.env"
+    ],
+    "postCreateCommand": "/bin/bash .devcontainer/scripts/postCreate.sh",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+            "GitHub.vscode-pull-request-github",
+            "GitHub.vscode-github-actions",
+            "ms-azuretools.vscode-docker",
+            "eamodio.gitlens",
+            "mhutchie.git-graph",
+            "humao.rest-client",
+            "ms-dotnettools.csdevkit",
+            "ms-dotnettools.csharp",
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "ms-python.debugpy",
+            "ms-azuretools.vscode-bicep"
+        ]
+      }
+    }
+}
