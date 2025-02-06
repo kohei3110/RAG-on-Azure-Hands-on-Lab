@@ -13,6 +13,8 @@ Dec 2024
 
 - [Appendix 1-3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価](#appendix-3-azure-openai-document-intelligence-を活用して作成した評価用データセットを用いた生成-ai-の評価)
 
+- [Appendix 1-4: Notebook を使用した AI Agent Service の動作確認](#appendix-1-4-notebook-を使用した-ai-agent-service-の動作確認)
+
 <br />
 
 ## Appendix 1-1: Azure OpenAI 使用状況の確認
@@ -219,3 +221,6 @@ Dec 2024
     
     <img src="./images/appendix-17.png" />
 
+## Appendix 1-4: Notebook を使用した AI Agent Service の動作確認
+
+- `app/python/agent/notebook/quickstart.ipynb` を実行
