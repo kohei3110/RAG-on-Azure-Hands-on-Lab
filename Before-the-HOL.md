@@ -23,20 +23,20 @@
 
     - [Bicep と Azure CLI を使用したリソースの展開](#1-b-bicep-と-azure-cli-を使用したリソースの展開)
 
-1. [Private DNS Zone の作成](#2-private-dns-zone-の作成)
+2. [Private DNS Zone の作成](#2-private-dns-zone-の作成)
 
-1. [仮想マシンの作成](#3-仮想マシンの作成)
+3. [仮想マシンの作成](#3-仮想マシンの作成)
 
-1. [仮想マシンへの接続](#4-仮想マシンへの接続)
+4. [仮想マシンへの接続](#4-仮想マシンへの接続)
 
 <br />
 
-> GitHub Actions による一括展開、Azure CLI を使用しての個々のリソース展開の選択が可  
+> GitHub Actions による一括展開 または Azure CLI を使用しての個々のリソース展開のいずれかを選択して事前準備リソースを展開します。
 >
-> Bastion の Developer SKU を使用する場合は、利用できるリージョンの事前確認が必要  
+> 事前準備リソースには、Azure Bastion が含まれます。Azure Bastion の Developer SKU を使用する場合は、利用できるリージョンの事前確認が必要です。
 > (<a href="https://learn.microsoft.com/ja-jp/azure/bastion/quickstart-developer-sku">Azure Bastion をデプロイする ‐ Developer SKU</a>)  
 >
-> Embeddings モデルで text-embedding-3-small, text-embedding-3-large を使用する際は、利用できるリージョンの事前確認が必要  
+> ベクトル検索を体験する手順において、Azure OpenAI の Embeddings モデルが必要です。Embeddings モデルに text-embedding-3-small, text-embedding-3-large を使用する際は、利用できるリージョンの事前確認が必要です。
 > (<a href="https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-embeddings">Azure OpenAI Service models</a>)
 
 <br />
@@ -114,7 +114,7 @@
 
 ### リソースの展開
 
-- <a href="https://portal.azure.com/">Azure Portal</a> からリソース グループを作成
+- <a href="https://portal.azure.com/">Azure Portal</a> からリソース グループを作成。リソースグループのリージョンは任意。
 
 - パラメーターの指定
 
@@ -160,7 +160,7 @@
 
 ### リソースの展開
 
-- <a href="https://portal.azure.com/">Azure Portal</a> からリソース グループを作成
+- <a href="https://portal.azure.com/">Azure Portal</a> からリソース グループを作成。リソースグループのリージョンは任意。
 
 - パラメーター ファイルを使用する場合は、**bicep** > **parameters** 配下のファイルにリソースの情報を指定
 
@@ -252,21 +252,76 @@
 
 ## 3. 仮想マシンの作成
 
+- ハンズオンには、仮想ネットワーク内に展開された API をコールする手順が含まれているため、展開済みの仮想ネットワーク内に仮想マシンを展開
+
+- **基本**
+
+  - **プロジェクトの詳細**
+
+    - **サブスクリプション**: ワークショップで使用中のサブスクリプション
+    - **リソースグループ**: 作成したリソースグループ
+
+  - **インスタンスの詳細**
+
+    - **仮想マシン名**: 任意（`hol-vm`等）
+    - **リージョン**: 展開済み仮想ネットワークのリージョン
+    - **可用性オプション**: インフラストラクチャ冗長は必要ありません
+    - **セキュリティの種類**: Standard
+    - **イメージ**: Windows 11 Enterprise N, version 22H2 - x64 Gen2
+    - **VM アーキテクチャ**: x64
+    - **Azure Spot 割引で実行する**: 無効
+    - **サイズ**: Standard_D4s_v5
+    - **休止状態を有効にする**: 無効
+
+  - **管理者アカウント**
+
+    - **ユーザー名**: 任意
+    - **パスワード**: 任意
+    - **パスワードの確認**: 任意
+
+  - **受信ポートの規則**
+
+    - **パブリック受信ポート**: なし
+
+  - **ライセンス**
+
+    - **マルチテナントをホストする権利を持つ有効な Windows 10/11 ライセンスを所有しています**: 有効
+
+- **次: ディスク >** を選択
+
+- **ディスク** 
+
+  - 設定値は既定のまま、**次: ネットワーク >** を選択
+
+- **ネットワーク**
+
+  - **ネットワーク インターフェイス**
+
+    - **仮想ネットワーク**: 展開済みの仮想ネットワーク
+    - **サブネット**: 展開済みの任意のサブネット
+    - **パブリック IP**: なし
+    - **NIC ネットワークセキュリティグループ**: なし
+    - **パブリック受信ポート**: なし
+    - **VM が削除されたときに NIC を削除する**: 有効
+    - **高速ネットワークを有効にする**: 有効
+
+  - **負荷分散**
+
+    - **負荷分散のオプション**: なし
+
+- **管理**、**監視**、**詳細**、**タグ**は既定のまま、**確認および作成**を選択し、**作成**を押下
+
 <br />
 
 ## 4. 仮想マシンへの接続
 
-### Bastion Developer SKU の利用
+### 4-(a). Bastion Developer SKU の利用
 
 - **Bastion** ページで資格情報を入力し **接続** をクリック時に Bastion Developer SKU がデプロイされ Bastion 経由で仮想マシンへ接続
 
   <img src="./images/bastion-developer-sku.png" />
 
-  ※ 以下のリージョンに展開した場合は、Bastion Developer SKU を利用可能 (2024年10月時点)
-
-  - 米国中部 EUAP (CentralUSEUAP)
-
-  - 米国東部 2 EUAP (EastUS2EUAP)
+  ※ 以下のリージョンに展開した場合は、Bastion Developer SKU を利用可能 (2025年2月時点)
 
   - 米国中西部 (WestCentralUS)
 
@@ -278,9 +333,9 @@
 
 <br />
 
-### Bastion Basic SKU の利用
+### 4-(b). Bastion Basic SKU の利用
 
-> Bastion Developer SKU が利用不可のリージョンの場合、Bastion Basic SKU を展開
+> Bastion Developer SKU が利用不可のリージョンでハンズオンを実施する場合、Bastion Basic SKU を展開
 
 - **bicep** > **parameters** 配下の **bastion.bicepparam** にリソースの情報を指定
 
@@ -291,3 +346,46 @@
     ```
 
     ※ Bastion 展開用の仮想ネットワーク、および他のリソースを展開した仮想ネットワーク間との VNet Peering を作成
+
+## 5. 仮想マシンに WSL2、Docker、VS Code をインストール
+
+Dev Container を使ってハンズオンを実施するため、WSL2、Docker、VS Code を仮想マシンにインストール。
+
+### 5-1. WSL を有効化
+
+- 管理者権限でPower Shellを開いて、以下コマンドを実行
+
+```
+wsl --install
+```
+
+- **仮想マシンを再起動**
+
+- Ubuntu アプリを開き、ユーザー名・パスワード（VM ユーザー名・パスワードと同じもの）を設定
+
+### 5-2. Docker CE をインストール
+
+- Docker 公式 GPG 鍵を追加
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+- Docker 安定版のレポジトリを追加
+
+```
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+- レポジトリをアップデートし、Docker Engine をインストール
+
+```
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io -y
+sudo usermod -aG docker $USER 
+newgrp docker
+```
+
+### 5-3. Visual Studio Code をインストール
+
+仮想マシンから [VS Code Official Site](https://code.visualstudio.com/) にアクセスし、インストール

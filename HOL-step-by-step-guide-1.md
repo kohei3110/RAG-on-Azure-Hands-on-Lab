@@ -84,29 +84,18 @@ Dec 2024
 
   <img src="./images/github-clone-01.png" />
 
-- Visual Studio Code を起動、サイドバーから **Explorer** を選択し **Clone Repository** をクリック
-
-  <img src="./images/github-clone-02.png" />
-
-- リポジトリの URL にコピーした URL を貼り付け Enter キーを押下
-
-  <img src="./images/github-clone-03.png" />
-
-- 複製先となるローカル ディレクトリを選択
-
-  > GitHub の認証情報が求められた場合は、資格情報を入力し認証を実施
-
-- クローンされたリポジトリを開きますか？のメッセージが表示されるので **Open** をクリック
-
-  <img src="./images/github-clone-04.png" />
-
-- **Terminal** > **New Terminal** を選択
-
-- git remote コマンドを実行し  クローン先である自身のアカウント名を含む URL が表示されることを確認
+- Ubuntu アプリを開き、以下のコマンドを実行
 
   ```
-  git remote -v
+  git clone <コピーした URL>（例: https://github.com/<ご自身のGitHubアカウント名>/RAG-on-Azure-Hands-on-Lab.git）
+  code RAG-on-Azure-Hands-on-Lab
   ```
+
+- Visual Studio Code が起動することを確認
+
+- VS Code 左下の「Open a Remote Window」ボタン（青背景に白字で 「> <」）を押下し、「Dev Container」を選択。
+
+  <img src="./images/github-clone-05.png" />
 
 <br />
 
