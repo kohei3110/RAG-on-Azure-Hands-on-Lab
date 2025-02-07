@@ -224,3 +224,5 @@ Dec 2024
 ## Appendix 1-4: Notebook を使用した AI Agent Service の動作確認
 
 - `app/python/agent/notebook/quickstart.ipynb` を実行
+
+Azure AI Agent Service については、[こちらのサンプルリポジトリ](https://github.com/kohei3110/azure-101-day)も併せてご確認ください。
